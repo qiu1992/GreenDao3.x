@@ -2,6 +2,7 @@ package com.qiu.greendao.db;
 
 
 import com.qiu.greendao.MyApplication;
+import com.qiu.greendao.MySQLiteOpenHelper;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -28,8 +29,11 @@ public class DBHelper
     {
         if (null == daoMaster)
         {
-            DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper (MyApplication.appContext,DB_NAME);
-            Database database = devOpenHelper.getEncryptedWritableDb ("qiu1992");
+//            DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper (MyApplication.appContext,DB_NAME);
+//            Database database = devOpenHelper.getEncryptedWritableDb ("qiu1992");
+
+            MySQLiteOpenHelper helper = new MySQLiteOpenHelper (MyApplication.appContext,DB_NAME,null);
+            Database database = helper.getEncryptedWritableDb ("qiu1992");
             daoMaster = new DaoMaster (database);
         }
 

@@ -121,12 +121,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    });
 
             List<User> userList = new ArrayList<> ();
-            for (int i = 0;i < 100;i++)
+            for (int i = 0; i < 100; i++)
             {
-                userList.add (new User ("qiu" + System.currentTimeMillis (),25f));
+                userList.add (new User ("qiu" + System.currentTimeMillis (), 25f, "fdfds"));
                 SystemClock.sleep (10);
             }
-            
+
             rxDao.insertInTx (userList)
                     .observeOn (AndroidSchedulers.mainThread ())
                     .subscribe (new Subscriber<Iterable<User>> ()
@@ -188,4 +188,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
         }
     }
+
+    /*
+    09-05 16:01:53.519 6828-6828/com.qiu.greendao E/SQLiteOpenHelper: Couldn't open qiu.db3 for writing (will try read-only):
+                                                                  net.sqlcipher.database.SQLiteConstraintException: UNIQUE constraint failed: USER.NAME: INSERT INTO USER (NAME,AGE) SELECT NAME,AGE FROM USER_TEMP;
+                                                                      at net.sqlcipher.database.SQLiteDatabase.native_execSQL(Native Method)
+                                                                      at net.sqlcipher.database.SQLiteDatabase.execSQL(SQLiteDatabase.java:2161)
+                                                                      at org.greenrobot.greendao.database.EncryptedDatabase.execSQL(EncryptedDatabase.java:37)
+                                                                      at com.qiu.greendao.MigrationHelper.restoreData(MigrationHelper.java:115)
+                                                                      at com.qiu.greendao.MigrationHelper.migrate(MigrationHelper.java:29)
+                                                                      at com.qiu.greendao.MySQLiteOpenHelper.onUpgrade(MySQLiteOpenHelper.java:30)
+                                                                      at org.greenrobot.greendao.database.DatabaseOpenHelper$EncryptedHelper.onUpgrade(DatabaseOpenHelper.java:185)
+                                                                      at net.sqlcipher.database.SQLiteOpenHelper.getWritableDatabase(SQLiteOpenHelper.java:173)
+                                                                      at net.sqlcipher.database.SQLiteOpenHelper.getReadableDatabase(SQLiteOpenHelper.java:227)
+                                                                      at net.sqlcipher.database.SQLiteOpenHelper.getReadableDatabase(SQLiteOpenHelper.java:214)
+                                                                      at org.greenrobot.greendao.database.DatabaseOpenHelper.getEncryptedWritableDb(DatabaseOpenHelper.java:134)
+                                                                      at com.qiu.greendao.db.DBHelper.getDaoMaster(DBHelper.java:36)
+                                                                      at com.qiu.greendao.db.DBHelper.getDaoSession(DBHelper.java:47)
+                                                                      at com.qiu.greendao.MainActivity.onClick(MainActivity.java:156)
+                                                                      at android.view.View.performClick(View.java:5198)
+                                                                      at android.view.View$PerformClick.run(View.java:21147)
+                                                                      at android.os.Handler.handleCallback(Handler.java:739)
+                                                                      at android.os.Handler.dispatchMessage(Handler.java:95)
+                                                                      at android.os.Looper.loop(Looper.java:148)
+                                                                      at android.app.ActivityThread.main(ActivityThread.java:5417)
+                                                                      at java.lang.reflect.Method.invoke(Native Method)
+                                                                      at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+                                                                      at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+
+     */
 }

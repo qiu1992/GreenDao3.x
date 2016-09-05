@@ -22,10 +22,13 @@ public class User
     @Transient
     private String desc;
 
-    @Generated(hash = 1803680259)
-    public User(String name, float age) {
+    private String books;
+
+    @Generated(hash = 984682853)
+    public User(String name, float age, String books) {
         this.name = name;
         this.age = age;
+        this.books = books;
     }
 
     @Generated(hash = 586692638)
@@ -60,5 +63,13 @@ public class User
     public void setDesc (String desc)
     {
         this.desc = desc;
+    }
+
+    public String getBooks() {
+        return this.books;
+    }
+
+    public void setBooks(String books) {
+        this.books = books;
     }
 }
